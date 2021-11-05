@@ -1,0 +1,20 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: octavia-ingress-controller-config
+  namespace: {{ .Values.namespace }} 
+data:
+  config: |
+    cluster-name: ${cluster_name}
+    openstack:
+      auth-url: ${auth_url}
+      domain-name: ${domain-name}
+      username: ${user_name}
+      # user-id: ${user_id}
+      password: ${password}
+      project-id: ${project_id}
+      region: ${region}
+    octavia:
+      subnet-id: {{ .Value.cloud-conf.public-network-name }}
+      floating-network-id: {{ .Value.cloud-conf.public-network-name }}
+      manage-security-groups:  {{ .Value.manage-security-groups }}

@@ -1,64 +1,44 @@
-[![CircleCI](https://circleci.com/gh/giantswarm/{APP-NAME}-app.svg?style=shield)](https://circleci.com/gh/giantswarm/{APP-NAME}-app)
+# Metrics
 
-# {APP-NAME} chart
+https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/metrics.md
 
-Giant Swarm offers a {APP-NAME} App which can be installed in workload clusters.
-Here we define the {APP-NAME} chart with its templates and default configuration.
+# Support cinder csi features :
 
-**What is this app?**
-**Why did we add it?**
-**Who can use it?**
+https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/cinder-csi-plugin/using-cinder-csi-plugin.md#supported-features
 
-## Installing
 
-There are 3 ways to install this app onto a workload cluster.
+# git subtree
 
-1. [Using our web interface](https://docs.giantswarm.io/ui-api/web/app-platform/#installing-an-app)
-2. [Using our API](https://docs.giantswarm.io/api/#operation/createClusterAppV5)
-3. Directly creating the [App custom resource](https://docs.giantswarm.io/ui-api/management-api/crd/apps.application.giantswarm.io/) on the management cluster.
 
-## Configuring
 
-### values.yaml
-**This is an example of a values file you could upload using our web interface.**
-```
-# values.yaml
+``
 
-```
+`export version=v1.22.0`
 
-### Sample App CR and ConfigMap for the management cluster
-If you have access to the Kubernetes API on the management cluster, you could create
-the App CR and ConfigMap directly.
+## charts/cinder-csi-plugin -> helm/cloud-provider-openstack-app/charts/cinder-csi-plugin
 
-Here is an example that would install the app to
-workload cluster `abc12`:
-
-```
-# appCR.yaml
-
-```
-
-```
-# user-values-configmap.yaml
 
 
 ```
+git fetch upstream-copy
+git checkout $version
+git subtree split -P charts/cinder-csi-plugin/ -b temp-split-branch
+git checkout master
+git subtree merge --squash -P helm/cloud-provider-openstack-app/charts/cinder-csi-plugin temp-split-branch
+git push
+git branch -D temp-split-branch
+```
 
-See our [full reference page on how to configure applications](https://docs.giantswarm.io/app-platform/app-configuration/) for more details.
+## charts/openstack-cloud-controller-manager -> helm/cloud-provider-openstack-app/charts/openstack-cloud-controller-manager
 
-## Compatibility
 
-This app has been tested to work with the following workload cluster release versions:
+```
+git fetch upstream-copy
+git checkout $version
+git subtree split -P charts/openstack-cloud-controller-manager -b temp-split-branch
+git checkout master
+git subtree merge --squash -P helm/cloud-provider-openstack-app/charts/openstack-cloud-controller-manager temp-split-branch
+git push
+git branch -D temp-split-branch
+```
 
-*
-
-## Limitations
-
-Some apps have restrictions on how they can be deployed.
-Not following these limitations will most likely result in a broken deployment.
-
-*
-
-## Credit
-
-* {APP HELM REPOSITORY}

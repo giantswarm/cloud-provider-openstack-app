@@ -1,0 +1,201 @@
+# This YAML file contains secret objects,
+# which are necessary to run the provider components
+
+kind: Secret
+apiVersion: v1
+metadata:
+  name: {{ .Values.cloud-conf-name }} 
+  namespace: {{ .Values.namespace }} 
+data:
+  cloud.conf: {{ .Values.cloud-conf | b64enc }}
+stringData:
+  cloud.conf: |-
+    
+    [Global]
+    {{ if os-endpoint-type }}
+    os-endpoint-type={{ .Values.os-endpoint-type }}
+    {{ end }}
+    {{ if ca-file }}
+    ca-file={{ .Values.ca-file }}
+    {{ end }}
+    {{ if username }}
+    username={{ .Values.username }}
+    {{ end }}
+    {{ if password }}
+    password={{ .Values.password }}
+    {{ end }}
+    {{ if region }}
+    region={{ .Values.region }}
+    {{ end }}
+    {{ if tls-insecure }}
+    tls-insecure={{ .Values.tls-insecure }}
+    {{ end }}
+    {{ if application-credential-secret }}
+    application-credential-secret={{ .Values.application-credential-secret }}
+    {{ end }}
+    {{ if application-credential-name }}
+    application-credential-name={{ .Values.application-credential-name }}
+    {{ end }}
+    {{ if application-credential-id }}
+    application-credential-id={{ .Values.application-credential-id }}
+    {{ end }}
+    {{ if cloud }}
+    cloud={{ .Values.cloud }}
+    {{ end }}
+    {{ if clouds-file}}
+    clouds-file={{ .Values.clouds-file }}
+    {{ end }}
+    {{ if use-clouds }}
+    use-clouds={{ .Values.use-clouds }}
+    {{ end }}
+    {{ if trustee-password }}
+    trustee-password={{ .Values.trustee-password }}
+    {{ end }}
+    {{ if trustee-id }}
+    trustee-id={{ .Values.trustee-id }}
+    {{ end }}
+    {{ if trust-id }}
+    trust-id={{ .Values.trust-id }}
+    {{ end }}
+    {{ if user-domain-name }}
+    user-domain-name={{ .Values.user-domain-name }}
+    {{ end }}
+    {{ if user-domain-id }}
+    user-domain-id={{ .Values.user-domain-id }}
+    {{ end }}
+    {{ if tenant-domain-name }}
+    tenant-domain-name={{ .Values.tenant-domain-name }}
+    {{ end }}
+    {{ if tenant-domain-id }}
+    tenant-domain-id={{ .Values.tenant-domain-id }}
+    {{ end }}
+    {{ if tenant-name }}
+    tenant-name={{ .Values.tenant-name }}
+    {{ end }}
+    {{ if tenant-id }}
+    tenant-id={{ .Values.tenant-id }}
+    {{ end }}
+    {{ if domain-name }}
+    domain-name={{ .Values.domain-name }}
+    {{ end }}
+    {{ if domain-id }}
+    domain-id={{ .Values.domain-id }}
+    {{ end }}
+    {{ if key-file }}
+    key-file={{ .Values.key-file= }}
+    {{ end }}
+    {{ if cert-file }}
+    cert-file={{ .Values.cert-file }}
+    {{ end }}
+    {{ if auth-url }}
+    auth-url={{ .Values.auth-url }}
+    {{ end }}
+
+    [Networking]
+    {{ if internal-network-name }}
+    internal-network-name={{ .Values.internal-network-name }}
+    {{ end }}
+    {{ if public-network-name }}
+    public-network-name={{ .Values.public-network-name }}
+    {{ end }}
+    {{ if ipv6-support-disabled }}
+    ipv6-support-disabled= {{ .Values.ipv6-support-disabled }}
+    {{ end }}
+
+    [LoadBalancer]
+    {{ if max-shared-lb }}
+    max-shared-lb={{ .Values.max-shared-lb }}
+    {{ end }}
+    {{ if default-tls-container-ref }}
+    default-tls-container-ref={{ .Values.default-tls-container-ref }}
+    {{ end }}
+    {{ if enable-ingress-hostname }}
+    enable-ingress-hostname={{ .Values.enable-ingress-hostname }}
+    {{ end }}
+    {{ if LoadBalancerClass }}
+    LoadBalancerClass={{ .Values.LoadBalancerClass }}
+    {{ end }}
+    {{ if availability-zone }}
+    availability-zone={{ .Values.availability-zone }}
+    {{ end }}
+    {{ if flavor-id }}
+    flavor-id={{ .Values.flavor-id }}
+    {{ end }}
+    {{ if cascade-delete }}
+    cascade-delete={{ .Values.cascade-delete }}
+    {{ end }}
+    {{ if internal-lb }}
+    internal-lb={{ .Values.internal-lb }}
+    {{ end }}
+    {{ if monitor-timeout }}
+    monitor-timeout={{ .Values.monitor-timeout }}
+    {{ end }}
+    {{ if monitor-max-retries }}
+    monitor-max-retries={{ .Values.monitor-max-retries }}
+    {{ end }}
+    {{ if monitor-delay }}
+    monitor-delay={{ .Values.monitor-delay }}
+    {{ end }}
+    {{ if create-monitor }}
+    create-monitor ={{ .Values.create-monitor }}
+    {{ end }}
+    {{ if manage-security-groups }}
+    manage-security-groups={{ .Values.manage-security-groups }}
+    {{ end }}
+    {{ if network-id }}
+    network-id={{ .Values.network-id }}
+    {{ end }}
+    {{ if subnet-id }}
+    subnet-id={{ .Values.subnet-id }}
+    {{ end }}
+    {{ if lb-version }}
+    lb-version={{ .Values.lb-version }}
+    {{ end }}
+    {{ if lb-provider }}
+    lb-provider={{ .Values.lb-provider }}
+    {{ end }}
+    {{ if lb-method }}
+    lb-method={{ .Values.lb-method }}
+    {{ end }}
+    {{ if floating-subnet-tags }}
+    floating-subnet-tags={{ .Values.floating-subnet-tags }}
+    {{ end }}
+    {{ if floating-subnet }}
+    floating-subnet={{ .Values.floating-subnet }}
+    {{ end }}
+    {{ if floating-subnet-id }}
+    floating-subnet-id={{ .Values.floating-subnet-id }}
+    {{ end }}
+    {{ if floating-network-id }}
+    floating-network-id={{ .Values.floating-network-id }}
+    {{ end }}
+    {{ if use-octavia}}
+    use-octavia={{ .Values.use-octavia }}
+    {{ end }}
+
+    [Metadata]
+    {{ if search-order }}
+    search-order={{ .Values.search-order }}
+    {{ end }}
+    {{ if configDrive }}
+    configDrive={{ .Values.configDrive }}
+    {{ end }}
+    {{ if metadataService }}
+    metadataService={{ .Values.metadataService }}
+    {{ end }}
+    {{ if metadataService-configDrive }}
+    metadataService-configDrive={{ .Values.metadataService-configDrive }}
+    {{ end }}
+
+    [BlockStorage]
+    {{ if node-volume-attach-limit }}
+    node-volume-attach-limit={{ .Values.node-volume-attach-limit }}
+    {{ end }}
+    {{ if rescan-on-resize }}
+    rescan-on-resize={{ .Values.rescan-on-resize }}
+    {{ end }}
+    {{ if ignore-volume-az }}
+    ignore-volume-az={{ .Values.ignore-volume-az }}
+    {{ end }}
+
+  cloud.conf: {{ .Values.cloud-conf }}

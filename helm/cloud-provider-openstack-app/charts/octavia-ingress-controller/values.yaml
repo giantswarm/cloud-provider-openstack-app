@@ -1,0 +1,9 @@
+  enable: true
+  namespace: kube-system
+  cloud-conf-name: cloud-config
+  manage-security-groups: true
+  image:
+    registry: quay.io
+    name: giantswarm/{APP-NAME}
+    tag: v0.0.1
+    pullPolicy: IfNotPresent

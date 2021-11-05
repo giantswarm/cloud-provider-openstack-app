@@ -1,0 +1,149 @@
+# TEMPLATE-APP: This is set as a reasonable default, feel free to change.
+
+name: {APP-NAME}
+serviceType: managed
+
+project:
+  branch: "[[ .Branch ]]"
+  commit: "[[ .SHA ]]"
+
+
+# Check here for config information 
+# https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/openstack-cloud-controller-manager/using-openstack-cloud-controller-manager.md
+
+cinder-csi-templates:
+    csi:
+      attacher:
+        image:
+          repository: k8s.gcr.io/sig-storage/csi-attacher
+          tag: v3.1.0
+          pullPolicy: IfNotPresent
+      provisioner:
+        topology: "true"
+        image:
+          repository: k8s.gcr.io/sig-storage/csi-provisioner
+          tag: v2.2.0
+          pullPolicy: IfNotPresent
+      snapshotter:
+        image:
+          repository: k8s.gcr.io/sig-storage/csi-snapshotter
+          tag: v4.0.0
+          pullPolicy: IfNotPresent
+      resizer:
+        image:
+          repository: k8s.gcr.io/sig-storage/csi-resizer
+          tag: v1.1.0
+          pullPolicy: IfNotPresent
+      livenessprobe:
+        image:
+          repository: k8s.gcr.io/sig-storage/livenessprobe
+          tag: v2.2.0
+      nodeDriverRegistrar:
+        image:
+          repository: k8s.gcr.io/sig-storage/csi-node-driver-registrar
+          tag: v2.1.0
+      plugin:
+        image:
+          repository: docker.io/k8scloudprovider/cinder-csi-plugin
+          pullPolicy: IfNotPresent
+          tag: 1.20.5
+        controllerPlugin:
+          replicas: 1
+      snapshotController:
+        enabled: false
+        image:
+          repository: k8s.gcr.io/sig-storage/snapshot-controller
+          tag: v4.0.0
+
+openstack-cloud-controller-manager:
+  namespace: kube-system
+  cloud-conf-name: cloud-config
+  image:
+    registry: quay.io
+    name: giantswarm/{APP-NAME}
+    tag: v0.0.1
+    pullPolicy: IfNotPresent
+
+octavia-ingress-controller:
+  enable: true
+  namespace: kube-system
+  cloud-conf-name: cloud-config
+  manage-security-groups: true
+  image:
+    registry: quay.io
+    name: giantswarm/{APP-NAME}
+    tag: v0.0.1
+    pullPolicy: IfNotPresent
+
+cloud-conf-name: cloud-config
+
+cloud-conf:
+  Global:
+    auth-url: ""
+    username: ""
+    password: ""
+    region: "null"
+    tls-insecure: true
+    tenant-domain-id: ""
+    domain-id: ""
+    os-endpoint-type: null
+    ca-file: null
+    application-credential-secret: null
+    application-credential-name: null
+    application-credential-id: null
+    cloud: null
+    clouds-file: null
+    use-clouds: null
+    trustee-password: null
+    trustee-id: null
+    trust-id: null
+    user-domain-name: null
+    user-domain-id: null
+    tenant-domain-name: null
+    tenant-name: null
+    tenant-id: null
+    domain-name: null
+    key-file: null
+    cert-file: null
+
+  Networking:
+    internal-network-name: null
+    public-network-name: null
+    ipv6-support-disabled: true
+
+  LoadBalancer:
+    max-shared-lb: null
+    default-tls-container-ref: null
+    enable-ingress-hostname: null
+    LoadBalancerClass : null
+    availability-zone: null
+    flavor-id: null
+    cascade-delete: null
+    internal-lb: null
+    monitor-timeout: null
+    monitor-max-retries: null
+    monitor-delay: null
+    create-monitor : null
+    manage-security-groups: null
+    network-id: null
+    subnet-id: null
+    lb-version: null
+    lb-provider: null
+    lb-method: null
+    floating-subnet-tags: null
+    floating-subnet: null
+    floating-subnet-id: null
+    floating-network-id: null
+    use-octavia : null
+
+  Metadata:
+    search-order: null
+    configDrive: null
+    metadataService: null
+    metadataService,configDrive: null
+
+  BlockStorage:
+    node-volume-attach-limit: null
+    rescan-on-resize: null
+    ignore-volume-az: null
+

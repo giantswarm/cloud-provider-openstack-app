@@ -15,8 +15,17 @@ secret:
 # use keys from here: https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/openstack-cloud-controller-manager/using-openstack-cloud-controller-manager.md#config-openstack-cloud-controller-manager
 cloudConfig:
   global:
+    auth-url: 
+    username: 
+    password: 
+    tenant-id: 
+    domain-name: 
+    region: 
   networking:
+    ipv6-support-disabled: true
+    public-network-name: 
   loadBalancer:
+    floating-network-id: 
   blockStorage:
   metadata:
 
@@ -25,7 +34,7 @@ cloudConfig:
 # Check here for config information 
 # https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/openstack-cloud-controller-manager/using-openstack-cloud-controller-manager.md
 
-cinder-csi-templates:
+openstack-cinder-csi:
     nameOverride: ""
     fullnameOverride: ""
     timeout: 3m
@@ -54,16 +63,28 @@ cinder-csi-templates:
       nodeDriverRegistrar:
         image:
           repository: k8s.gcr.io/sig-storage/csi-node-driver-registrar
-          tag: v1.3.0
+          tag: v1.3.0 
       plugin:
         image:
           repository: docker.io/k8scloudprovider/cinder-csi-plugin
+          pullPolicy: IfNotPresent
           tag:  # defaults to .Chart.AppVersion
+        volumes:
+          - name: cacert
+            hostPath:
+              path: /etc/cacert
+        volumeMounts:
+          - name: cacert
+            mountPath: /etc/cacert
+            readOnly: true
+          - name: cloud-config
+            mountPath: /etc/kubernetes/
+            readOnly: true
 
     secret:
       enabled: true
       create: false
-
+      name: cloud-config
     storageClass:
       enabled: true
       delete:

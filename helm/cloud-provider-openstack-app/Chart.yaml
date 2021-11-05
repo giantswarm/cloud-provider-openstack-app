@@ -11,9 +11,8 @@ version: 0.0.0 # [[ .Version ]] if you're using architect instead of app-build-s
 
 dependencies:
 - name: openstack-cloud-controller-manager
-  version: 0.0.0
-- name: octavia-ingress-controller
-  version: 0.0.0
-- name: cinder-csi-plugin
-  version: 0.0.0
+  version: 1.1.2
+- name: openstack-cinder-csi
+  version: 1.2.14
+
 

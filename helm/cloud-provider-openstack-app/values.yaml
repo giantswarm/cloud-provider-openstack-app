@@ -26,6 +26,8 @@ cloudConfig:
     public-network-name: 
   loadBalancer:
     floating-network-id: 
+    network-id: 
+    subnet-id: 
   blockStorage:
   metadata:
 

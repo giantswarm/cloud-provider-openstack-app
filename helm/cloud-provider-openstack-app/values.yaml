@@ -119,3 +119,13 @@ openstack-cloud-controller-manager:
   secret:
     create: false
   #  name:
+  tolerations:
+   - key: node.cloudprovider.kubernetes.io/uninitialized
+     value: "true"
+     effect: NoSchedule
+   - key: node-role.kubernetes.io/controlplane
+     value: "true"
+     effect: NoSchedule
+   - key: node-role.kubernetes.io/etcd
+     value: "true"
+     effect: NoExecute

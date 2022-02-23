@@ -7,6 +7,14 @@ project:
   branch: "[[ .Branch ]]"
   commit: "[[ .SHA ]]"
 
+storageClass:
+  enabled: true
+  delete:
+    isDefault: true
+    allowVolumeExpansion: true
+  retain:
+    isDefault: false
+    allowVolumeExpansion: true
 
 secret:
   create: true
@@ -89,13 +97,7 @@ openstack-cinder-csi:
     create: false
     name: cloud-config
   storageClass:
-    enabled: true
-    delete:
-      isDefault: true
-      allowVolumeExpansion: true
-    retain:
-      isDefault: false
-      allowVolumeExpansion: true
+    enabled: false
 
 
 openstack-cloud-controller-manager:

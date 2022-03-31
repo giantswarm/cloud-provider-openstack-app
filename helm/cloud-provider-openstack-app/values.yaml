@@ -31,6 +31,8 @@ cloudConfig:
 openstack-cinder-csi:
   clusterID: {}
   csi:
+    snapshotController:
+      enabled: true
     plugin:
       image:
         repository: docker.io/k8scloudprovider/cinder-csi-plugin

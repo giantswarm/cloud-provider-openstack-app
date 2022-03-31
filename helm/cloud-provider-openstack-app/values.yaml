@@ -65,7 +65,7 @@ openstack-cinder-csi:
 openstack-cloud-controller-manager:
 
   # Create a service monitor for Prometheus Operator
-  #serviceMonitor:
+  # serviceMonitor:
   #  enabled: true
   controllerExtraArgs: {}
   secret:

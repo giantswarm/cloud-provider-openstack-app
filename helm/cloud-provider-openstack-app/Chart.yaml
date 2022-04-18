@@ -10,6 +10,8 @@ sources:
 version: [[ .Version ]]
 
 dependencies:
+- name: csi-external-snapshotter
+  version: 0.0.1
 - name: openstack-cloud-controller-manager
   version: 1.2.0
 - name: openstack-cinder-csi

@@ -81,8 +81,6 @@ openstack-cloud-controller-manager:
   controllerExtraArgs: {}
   secret:
     create: false
-  nodeSelector:
-    node-role.kubernetes.io/control-plane: ""
   tolerations:
     - key: node.cloudprovider.kubernetes.io/uninitialized
       value: "true"

@@ -1,3 +1,7 @@
+# This repo is currently UNMAINTAINED.
+**If you want to work on it, please fork.**
+
+
 # How to install
 
 ## Modify values.yaml files

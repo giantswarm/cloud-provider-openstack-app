@@ -4,15 +4,14 @@ name: cloud-provider-openstack-app
 description: A Helm chart for cloud-provider-openstack
 engine: gotpl
 home: https://github.com/giantswarm/cloud-provider-openstack-app
-
 sources:
 - https://github.com/giantswarm/cloud-provider-openstack-app
 version: [[ .Version ]]
-
 dependencies:
 - name: openstack-cloud-controller-manager
   version: 1.2.0
 - name: openstack-cinder-csi
   version: 2.1.0
-
 icon: https://s.giantswarm.io/app-icons/openstack/1/light.svg
+annotations:
+  application.giantswarm.io/team: rocket
